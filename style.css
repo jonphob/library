@@ -5,15 +5,15 @@
 :root {
   --background: hsl(210, 11%, 61%);
   --accent-4: hsl(210, 19%, 28%);
-  --accent-3: hsl(208, 40%, 68%);
+  --accent-3: hsl(208, 40%, 95%);
   --accent-2: hsl(333, 16%, 63%);
-  --accent-1: hsl(331, 12%, 43%);
+  --accent-1: #7b606d;
   --text: #eeeeee;
 }
 
 html {
   font-size: 18px;
-  color: var(--text);
+  color: var(--background);
 }
 
 body {
@@ -50,7 +50,7 @@ button {
   font-weight: 700;
   margin-left: 30px;
   padding-top: 9px;
-  color: #fff;
+  color: var(--background);
 }
 
 .logo img {
@@ -64,6 +64,7 @@ button {
   border-radius: 10px;
   display: block;
   position: relative;
+  color: var(--text);
 }
 
 .sidebar-container {
@@ -112,8 +113,8 @@ input#read_false {
   padding: 11px 2px;
   border-radius: 30px;
   border: 0;
-  color: var(--text);
-  background-color: var(--accent-3);
+  color: #fff;
+  background-color: hsl(208, 40%, 64%);
   position: absolute;
   bottom: 96px;
   left: 14px;
@@ -121,7 +122,7 @@ input#read_false {
 
 .addBookBtn:hover {
   cursor: pointer;
-  background-color: hsl(208, 40%, 64%);
+  background-color: hsl(208, 40%, 68%);
 }
 
 .addBookBtn:active {
@@ -137,12 +138,14 @@ input#read_false {
   gap: 1rem;
   align-items: center;
   justify-items: center;
+  color: var(--text);
   /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
 }
 
 .libraryEmpty {
   grid-area: 1 / 1 / 1 / 4;
   display: none;
+  color: hsl(210, 11%, 51%);
 }
 
 .read-status {
@@ -165,6 +168,10 @@ input#read_false {
   justify-content: space-around;
   padding: 10px;
   transition: 250ms;
+}
+
+.id {
+  display: none;
 }
 
 .title {
