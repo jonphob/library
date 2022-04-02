@@ -16,8 +16,11 @@
       sizes="16x16"
       href="assets/favicon-16x16.png"
     />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
+   <script src="https://kit.fontawesome.com/b9a629d28d.js" crossorigin="anonymous"></script>
     <script src="./script.js" defer></script>
     <title>Odin Project | Library</title>
   </head>
@@ -35,43 +38,45 @@
             <p>Add new book</p>
             <label for="title"
               >Title
-              <input type="text" name="title" id="title" />
+              <input required type="text" name="title" id="title" />
             </label>
             <label for="author"
               >Author
-              <input type="text" name="author" id="author" />
+              <input required type="text" name="author" id="author" />
             </label>
             <label for="category"
               >Category
-              <input type="text" name="category" id="category" />
+              <input required type="text" name="category" id="category" />
             </label>
             <label for="pages"
               >No. of Pages
-              <input type="number" name="pages" id="pages" />
+              <input required type="number" name="pages" id="pages" />
             </label>
             
             <p class="form-text">I've read this</p>
 
-              <input type="radio" name="read" id="read_true" value="true" />
+              <input required type="radio" name="read" id="read_true" value="true" />
               <label for="read_true">Yes</label>
 
-              <input type="radio" name="read" id="read_false" value="false" />
+              <input required type="radio" name="read" id="read_false" value="false" />
               <label for="read_false">No</label>
             </label>
-            <button class="addBookBtn" type="submit">Add To Library</button>
+            <button type="submit" class="addBookBtn">Add To Library</button>
           </form>
         </div>
       </div>
       <div class="main">
-        <div class="card">
+        <div class="libraryEmpty">
+          <p>Add a book to start your library</p>
+        </div>
+        <!-- <div class="card">
           <p class="title">Harry Potter & The Prisoner of Azkaban</p>
           <p class="author">JK Rowling</p>
           <p class="pages">456 pages</p>
-          <p class="read">Read</p>
+          <button class="readBtn">Read<i class="readIcon false fa-solid fa-xmark"></i></button>
         </div>
-        <div class="card"></div>
-        <div class="card"></div>
+        
+       
       </div>
-    </div>
   </body>
 </html>

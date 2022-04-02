@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700&family=Nunito:wght@200;400;600&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Khula:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+
 :root {
-  --background: #919ca7;
-  --accent-4: #3a4856;
-  --accent-3: #8cafce;
-  --accent-2: #b093a0;
-  --accent-1: #7b606d;
+  --background: hsl(210, 11%, 61%);
+  --accent-4: hsl(210, 19%, 28%);
+  --accent-3: hsl(208, 40%, 68%);
+  --accent-2: hsl(333, 16%, 63%);
+  --accent-1: hsl(331, 12%, 43%);
   --text: #eeeeee;
 }
 
@@ -16,12 +18,16 @@ html {
 
 body {
   background-color: var(--accent-3);
-  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 }
 
+button {
+  transition: 350ms;
+}
+
 .container {
-  width: 900px;
+  width: 1000px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(200px, 25%) 1fr;
@@ -44,7 +50,7 @@ body {
   font-weight: 700;
   margin-left: 30px;
   padding-top: 9px;
-  color: var(--text);
+  color: #fff;
 }
 
 .logo img {
@@ -101,14 +107,13 @@ input#read_false {
 .addBookBtn {
   font-size: 1.2rem;
   display: block;
-  width: 70%;
+  width: 85%;
   margin-top: 20px;
   padding: 11px 2px;
   border-radius: 30px;
   border: 0;
   color: var(--text);
   background-color: var(--accent-3);
-  transition: 450ms;
   position: absolute;
   bottom: 96px;
   left: 14px;
@@ -116,7 +121,7 @@ input#read_false {
 
 .addBookBtn:hover {
   cursor: pointer;
-  background-color: var(--accent-2);
+  background-color: hsl(208, 40%, 64%);
 }
 
 .addBookBtn:active {
@@ -127,12 +132,27 @@ input#read_false {
   grid-area: 2 / 2 / 7 / 3;
   border-radius: 5px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   grid-template-rows: repeat(2, 200px);
-  gap: 0.8rem;
+  gap: 1rem;
   align-items: center;
   justify-items: center;
   /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
+}
+
+.libraryEmpty {
+  grid-area: 1 / 1 / 1 / 4;
+  display: none;
+}
+
+.read-status {
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  vertical-align: sub;
+  margin-left: 4px;
 }
 
 .card {
@@ -142,27 +162,55 @@ input#read_false {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-around;
   padding: 10px;
   transition: 250ms;
 }
 
 .title {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1.2rem;
+  font-family: "Libre Baskerville";
 }
 
 .author {
+  font-style: italic;
   font-size: 0.9rem;
   margin-top: 0.7rem;
   color: var(--text);
 }
 
 .pages {
+  font-size: 0.8rem;
   margin-top: 1.2rem;
 }
 
 .read {
-  margin-top: 0.33rem;
+  margin-top: 1rem;
+}
+
+.readBtn {
+  width: 6rem;
+  padding: 6px 2px;
+  border-radius: 20px;
+  border: 0;
+  margin-top: 10px;
+}
+
+.readBtn:hover {
+  cursor: pointer;
+  background-color: hsl(331, 12%, 83%);
+}
+
+.readIcon {
+  margin-left: 5px;
+}
+
+.true {
+  color: green;
+}
+
+.false {
+  color: red;
 }
