@@ -3,27 +3,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Khula:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
 
 :root {
-  --background: hsl(210, 11%, 61%);
-  --accent-4: hsl(210, 19%, 28%);
-  --accent-3: hsl(208, 40%, 95%);
-  --accent-2: hsl(333, 16%, 63%);
-  --accent-1: #7b606d;
-  --text: #eeeeee;
+  --light-steel-blue: 211, 39%, 71%;
+  --silver-sand: hsla(194, 10%, 74%, 1);
+  --background: 180, 2%, 92%;
+  --silver-chalice: hsla(171, 4%, 66%, 1);
+  --button-bkg: 202, 72%, 46%;
+  --text-dark: hsla(0, 0%, 17%, 1);
+  --text-light: hsl(0, 0%, 100%);
 }
 
 html {
   font-size: 18px;
-  color: var(--background);
+  color: var(--text);
 }
 
 body {
-  background-color: var(--accent-3);
+  background-color: hsla(var(--background), 1);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 }
 
 button {
   transition: 350ms;
+}
+
+svg {
+  pointer-events: none;
 }
 
 .container {
@@ -50,7 +55,7 @@ button {
   font-weight: 700;
   margin-left: 30px;
   padding-top: 9px;
-  color: var(--background);
+  color: hsl(var(--text));
 }
 
 .logo img {
@@ -60,11 +65,11 @@ button {
 
 .sidebar {
   grid-area: 2 / 1 / 7 / 2;
-  background-color: var(--background);
+  background-color: var(--silver-sand);
   border-radius: 5px;
   display: block;
   position: relative;
-  color: var(--text);
+  color: hsl(var(--text));
 }
 
 .sidebar-container {
@@ -89,12 +94,13 @@ input[type="number"] {
   width: 95%;
   font-size: 1rem;
   padding: 8px 12px;
-  background-color: var(--text);
+  background-color: hsla(var(--background), 1);
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus {
-  background-color: #d8d8d8;
+  background-color: hsl(var(--background), 0.5);
+  border: 2px solid var(--button-bkg);
 }
 
 input#read_false {
@@ -114,7 +120,7 @@ input#read_false {
   border-radius: 30px;
   border: 0;
   color: #fff;
-  background-color: hsl(208, 40%, 64%);
+  background-color: hsla(var(--button-bkg), 1);
   position: absolute;
   bottom: 96px;
   left: 14px;
@@ -122,7 +128,7 @@ input#read_false {
 
 .addBookBtn:hover {
   cursor: pointer;
-  background-color: hsl(208, 40%, 68%);
+  background-color: hsla(var(--button-bkg), 0.8);
 }
 
 .addBookBtn:active {
@@ -144,8 +150,8 @@ input#read_false {
 
 .libraryEmpty {
   grid-area: 1 / 1 / 1 / 4;
-  display: none;
-  color: hsl(210, 11%, 51%);
+  display: block;
+  color: hsl(var(--text));
 }
 
 .read-status {
@@ -161,7 +167,7 @@ input#read_false {
 .card {
   width: 90%;
   height: 200px;
-  background-color: var(--accent-2);
+  background-color: hsla(var(--light-steel-blue), 0.4);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -178,16 +184,21 @@ input#read_false {
   position: absolute;
   right: -5px;
   top: -5px;
-  background-color: #d8d8d8;
+  background-color: #fff;
   border-radius: 50%;
-  color: #7b606d;
+  color: red;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: 350ms;
 }
 
 .badge i {
   font-size: 0.5rem;
+}
+
+.badge:hover {
+  transform: scale(1.6);
 }
 
 .id {
@@ -219,19 +230,35 @@ input#read_false {
 
 .readBtn {
   width: 6rem;
-  padding: 6px 2px;
+  height: 40px;
+  padding: 1px 10px;
   border-radius: 20px;
   border: 0;
   margin-top: 10px;
+  background-color: hsla(var(--button-bkg), 1);
+  font-size: 0.9rem;
+  color: #fff;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: relative;
 }
 
 .readBtn:hover {
   cursor: pointer;
-  background-color: hsl(331, 12%, 83%);
+  background-color: hsla(var(--button-bkg), 0.8);
 }
 
 .readIcon {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
   margin-left: 5px;
+  background-color: #fff;
+  padding: 2px;
+  position: absolute;
+  right: 4px;
+  cursor: default;
 }
 
 .true {

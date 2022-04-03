@@ -2,33 +2,28 @@ const form = document.querySelector(".addNewBook");
 const emptyLibraryDiv = document.querySelector(".libraryEmpty");
 const main = document.querySelector(".main");
 const readBtn = document.querySelector(".readBtn");
+const deleteBookBtn = document.querySelector(".deleteBook");
+
+const emptyLibraryElement =
+  "<div class='libraryEmpty'>" +
+  "<p>Add a book to start your library</p>" +
+  "</div>";
+
+//populate array with local storage if exists
+let library = JSON.parse(localStorage.getItem("library")) || [];
 
 form.addEventListener("submit", getBookFromInput);
 
 document.addEventListener("click", (e) => {
   if (e.target.hasAttribute("data-bookID")) {
-    let id = e.target.getAttribute("data-bookID");
-    library = getDataFromLocalStorage();
-    localStorage.clear();
-    let refreshedLibrary = [];
-    library.forEach((book) => {
-      if (book.id === id) {
-        book.read === "true" ? (book.read = "false") : (book.read = "true");
-        refreshedLibrary.push(book);
-      } else {
-        refreshedLibrary.push(book);
-      }
-    });
-    localStorage.setItem("library", JSON.stringify(refreshedLibrary));
-    refreshPage(refreshedLibrary);
+    toggleRead(e);
+  }
+
+  if (e.target.hasAttribute("data-delete")) {
+    let id = e.target.getAttribute("data-delete");
+    deleteBook(id);
   }
 });
-
-//create library array
-let library = [];
-
-//populate array with local storage if exists
-library = JSON.parse(localStorage.getItem("library")) || [];
 
 //Generates Random ID for each book added
 function guid() {
@@ -42,8 +37,9 @@ function guid() {
 
 function refreshPage(library) {
   if (library.length === 0) {
-    emptyLibraryDiv.style.display = "block";
+    main.innerHTML = emptyLibraryElement;
   } else {
+    emptyLibraryDiv.style.display = "none";
     main.innerHTML = null;
     let html = null;
     emptyLibraryDiv.style.display = "none";
@@ -57,14 +53,14 @@ function refreshPage(library) {
       });
 
       html = `<div class="card data-book=${index}">`;
-      html += `<div class="badge"><i class="fa-solid fa-xmark fa-xs"></i></div>`;
+      html += `<div data-delete="${book.id}" class="badge deleteBook"><i class="fa-solid fa-xmark fa-xs"></i></div>`;
       html += `<p class="id">${book.id}</p>`;
       html += `<p class="title">${book.title}</p>`;
       html += `<p class="author">${book.author}</p>`;
       html += `<p class="pages">No. of Pages ${book.pages}</p>`;
 
       if (book.read === "true") {
-        html += `<button data-bookID="${book.id}"class="readBtn">Read<i class="readIcon true fa-solid fa-check"></i></button>`;
+        html += `<button data-bookID="${book.id}"class="readBtn">Read<i class="readIcon true fa-solid fa-check fa-xs"></i></button>`;
       } else {
         html += `<button data-bookID="${book.id}"class="readBtn">Read<i class="readIcon false fa-solid fa-xmark"></i></button>`;
       }
@@ -109,6 +105,35 @@ function Book(id, title, author, category, pages, isRead) {
   this.category = category;
   this.pages = pages;
   this.read = isRead;
+}
+
+function toggleRead(e) {
+  let id = e.target.getAttribute("data-bookID");
+  library = getDataFromLocalStorage();
+  localStorage.clear();
+  let refreshedLibrary = [];
+  library.forEach((book) => {
+    if (book.id === id) {
+      book.read === "true" ? (book.read = "false") : (book.read = "true");
+      refreshedLibrary.push(book);
+    } else {
+      refreshedLibrary.push(book);
+    }
+  });
+  localStorage.setItem("library", JSON.stringify(refreshedLibrary));
+  refreshPage(refreshedLibrary);
+}
+
+function deleteBook(bookID) {
+  console.log("delete clicked", bookID);
+  library = getDataFromLocalStorage();
+  localStorage.clear();
+  let refreshedLibrary = library.filter((value, index, array) => {
+    return value.id !== bookID;
+  });
+  console.log(refreshedLibrary, refreshedLibrary.length);
+  localStorage.setItem("library", JSON.stringify(refreshedLibrary));
+  refreshPage(refreshedLibrary);
 }
 
 refreshPage(library);
