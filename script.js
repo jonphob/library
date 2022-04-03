@@ -2,20 +2,51 @@ const form = document.querySelector(".addNewBook");
 const emptyLibraryDiv = document.querySelector(".libraryEmpty");
 const main = document.querySelector(".main");
 const readBtn = document.querySelector(".readBtn");
+
+form.addEventListener("submit", getBookFromInput);
+
+document.addEventListener("click", (e) => {
+  if (e.target.hasAttribute("data-bookID")) {
+    let id = e.target.getAttribute("data-bookID");
+    library = getDataFromLocalStorage();
+    localStorage.clear();
+    // console.log(library);
+    let refreshedLibrary = [];
+    library.forEach((book) => {
+      if (book.id === id) {
+        console.log(`id = ${id}`);
+        console.log(`book.id = ${book.id}`);
+        console.log("matches");
+        book.read === "true" ? (book.read = "false") : (book.read = "true");
+        refreshedLibrary.push(book);
+      } else {
+        refreshedLibrary.push(book);
+      }
+    });
+    localStorage.setItem("library", JSON.stringify(refreshedLibrary));
+    refreshPage(refreshedLibrary);
+  } else {
+    console.log("Button not clicked");
+  }
+});
+
+//create library array
 let library = [];
+
+//populate array with local storage if exists
 library = JSON.parse(localStorage.getItem("library")) || [];
 
-//Generates Random ID
-const guid = () => {
+//Generates Random ID for each book added
+function guid() {
   let s4 = () => {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1);
   };
   return s4() + "-" + s4() + "-" + s4() + "-" + s4();
-};
+}
 
-const refreshPage = (library) => {
+function refreshPage(library) {
   if (library.length === 0) {
     emptyLibraryDiv.style.display = "block";
   } else {
@@ -38,16 +69,16 @@ const refreshPage = (library) => {
       html += `<p class="pages">No. of Pages ${book.pages}</p>`;
 
       if (book.read === "true") {
-        html += `<button class="readBtn">Read<i class="readIcon true fa-solid fa-check"></i></button>`;
+        html += `<button data-bookID="${book.id}"class="readBtn">Read<i class="readIcon true fa-solid fa-check"></i></button>`;
       } else {
-        html += `<button class="readBtn">Read<i class="readIcon false fa-solid fa-xmark"></i></button>`;
+        html += `<button data-bookID="${book.id}"class="readBtn">Read<i class="readIcon false fa-solid fa-xmark"></i></button>`;
       }
       html += `</div>`;
 
       main.innerHTML += html;
     });
   }
-};
+}
 
 const saveDataToLocalStorage = (book) => {
   var bookArray = [];
@@ -61,7 +92,7 @@ const getDataFromLocalStorage = () => {
   return library;
 };
 
-const getBookFromInput = (e) => {
+function getBookFromInput(e) {
   e.preventDefault();
   let id = guid();
   let title = form.title.value;
@@ -74,17 +105,7 @@ const getBookFromInput = (e) => {
   form.reset();
   library = getDataFromLocalStorage();
   refreshPage(library);
-};
-
-form.addEventListener("submit", getBookFromInput);
-
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("readBtn")) {
-    console.log("Button Clicked");
-  } else {
-    console.log("Button not clicked");
-  }
-});
+}
 
 function Book(id, title, author, category, pages, isRead) {
   this.id = id;
