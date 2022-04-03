@@ -57,6 +57,7 @@ function refreshPage(library) {
       });
 
       html = `<div class="card data-book=${index}">`;
+      html += `<div class="badge"><i class="fa-solid fa-xmark fa-xs"></i></div>`;
       html += `<p class="id">${book.id}</p>`;
       html += `<p class="title">${book.title}</p>`;
       html += `<p class="author">${book.author}</p>`;

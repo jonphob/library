@@ -61,7 +61,7 @@ button {
 .sidebar {
   grid-area: 2 / 1 / 7 / 2;
   background-color: var(--background);
-  border-radius: 10px;
+  border-radius: 5px;
   display: block;
   position: relative;
   color: var(--text);
@@ -162,12 +162,32 @@ input#read_false {
   width: 90%;
   height: 200px;
   background-color: var(--accent-2);
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 10px;
   transition: 250ms;
+  position: relative;
+}
+
+.badge {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  background-color: #d8d8d8;
+  border-radius: 50%;
+  color: #7b606d;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.badge i {
+  font-size: 0.5rem;
 }
 
 .id {
