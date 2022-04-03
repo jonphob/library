@@ -10,13 +10,9 @@ document.addEventListener("click", (e) => {
     let id = e.target.getAttribute("data-bookID");
     library = getDataFromLocalStorage();
     localStorage.clear();
-    // console.log(library);
     let refreshedLibrary = [];
     library.forEach((book) => {
       if (book.id === id) {
-        console.log(`id = ${id}`);
-        console.log(`book.id = ${book.id}`);
-        console.log("matches");
         book.read === "true" ? (book.read = "false") : (book.read = "true");
         refreshedLibrary.push(book);
       } else {
@@ -25,8 +21,6 @@ document.addEventListener("click", (e) => {
     });
     localStorage.setItem("library", JSON.stringify(refreshedLibrary));
     refreshPage(refreshedLibrary);
-  } else {
-    console.log("Button not clicked");
   }
 });
 
