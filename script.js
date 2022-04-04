@@ -6,6 +6,7 @@ const deleteBookBtn = document.querySelector(".deleteBook");
 const deleteLibraryBtn = document.querySelector(".deleteLibraryBtn");
 const cancelDelete = document.querySelector(".cancelDelete");
 const confirmDelete = document.querySelector(".confirmDelete");
+let id;
 
 const emptyLibraryElement =
   "<div class='libraryEmpty'>" +
@@ -14,7 +15,6 @@ const emptyLibraryElement =
 
 //populate array with local storage if exists
 let library = JSON.parse(localStorage.getItem("library")) || [];
-console.log(library);
 
 form.addEventListener("submit", getBookFromInput);
 
@@ -24,24 +24,49 @@ document.addEventListener("click", (e) => {
   }
 
   if (e.target.hasAttribute("data-delete")) {
-    let id = e.target.getAttribute("data-delete");
-    deleteBook(id);
+    id = e.target.getAttribute("data-delete");
+    deleteBookModal.showModal();
   }
 
   if (e.target.classList.contains("deleteLibraryBtn")) {
-    confirmLibraryDelete.showModal();
-    document.body.style.overflow = "hidden";
-    confirmLibraryDelete.addEventListener("close", (event) => {
-      document.body.style.overflow = "";
-    });
+    library = getDataFromLocalStorage();
+    //check if library exists
+    if (library.length === 0) {
+      noLibrary.showModal();
+      document.body.style.overflow = "hidden";
+      noLibrary.addEventListener("close", (event) => {
+        document.body.style.overflow = "";
+      });
+    } else {
+      confirmLibraryDelete.showModal();
+      document.body.style.overflow = "hidden";
+      confirmLibraryDelete.addEventListener("close", (event) => {
+        document.body.style.overflow = "";
+      });
+    }
   }
-
-  if (e.target.classList.contains("confirmDelete")) {
+  //handle delete library modal buttons
+  if (e.target.classList.contains("confirmDeleteLibrary")) {
     deleteLibrary();
   }
 
   if (e.target.classList.contains("cancelDelete")) {
     confirmLibraryDelete.close();
+  }
+
+  //handle 'no library to delete' modal close
+  if (e.target.classList.contains("cancelNoLibrary")) {
+    noLibrary.close();
+  }
+
+  //handle 'delete book' modal buttons
+  if (e.target.classList.contains("cancelDelete")) {
+    deleteBookModal.close();
+  }
+
+  if (e.target.classList.contains("confirmDeleteBook")) {
+    deleteBook(id);
+    deleteBookModal.close();
   }
 });
 
@@ -74,6 +99,7 @@ function refreshPage(library) {
 
       html = `<div class="card data-book=${index}">`;
       html += `<div data-delete="${book.id}" class="badge deleteBook"><i class="fa-solid fa-xmark fa-xs"></i></div>`;
+
       html += `<p class="id">${book.id}</p>`;
       html += `<p class="title">${book.title}</p>`;
       html += `<p class="author">${book.author}</p>`;
@@ -145,13 +171,11 @@ function toggleRead(e) {
 }
 
 function deleteBook(bookID) {
-  console.log("delete clicked", bookID);
   library = getDataFromLocalStorage();
   localStorage.clear();
   let refreshedLibrary = library.filter((value, index, array) => {
     return value.id !== bookID;
   });
-  console.log(refreshedLibrary, refreshedLibrary.length);
   localStorage.setItem("library", JSON.stringify(refreshedLibrary));
   refreshPage(refreshedLibrary);
 }

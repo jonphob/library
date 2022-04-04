@@ -72,11 +72,26 @@
           <p>Add a book to start your library</p>
         </div>
       </div>
+
       <dialog id="confirmLibraryDelete">
        <h1>Warning</h1>
        <p>This will delete your entire library</p>
-       <button class="modalBtn confirmDelete">Confirm Deletion</button>
+       <button class="modalBtn confirmDelete confirmDeleteLibrary">Confirm Deletion</button>
        <button class="modalBtn cancelDelete">Go Back</button>
       </dialog>
+
+      <dialog id="noLibrary">
+       <h1>Slight Problem....</h1>
+       <p>You have no library to delete</p>
+       <button class="modalBtn cancelDelete cancelNoLibrary">Go Back</button>
+      </dialog>
+
+       <dialog id="deleteBookModal">
+        <h1>Confirm</h1>
+        <p>This will delete the selected book from the library</p>
+        <button class="modalBtn confirmDelete confirmDeleteBook">Confirm Deletion</button>
+        <button class="modalBtn cancelDelete cancelDeleteBook">Go Back</button>
+      </dialog>
+      
   </body>
 </html>
