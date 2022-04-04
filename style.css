@@ -307,4 +307,53 @@ input#read_false {
 dialog {
   border: 0;
   border-radius: 5px;
+  width: 60%%;
+  transition: opacity 0.5s;
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+dialog::backdrop {
+  background-color: hsla(202, 72%, 46%, 0.4);
+}
+
+dialog[open] {
+  opacity: 1;
+  pointer-events: inherit;
+  display: block;
+}
+
+#confirmLibraryDelete h1 {
+  color: rgb(219, 34, 34);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+#confirmLibraryDelete p {
+  margin-bottom: 2rem;
+}
+
+.modalBtn {
+  display: inline;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  font-size: 1rem;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modalBtn:last-child {
+  margin-left: 5px;
+}
+
+.confirmDelete {
+  background-color: rgb(219, 34, 34);
+}
+
+.cancelDelete {
+  background-color: hsla(var(--button-bkg), 1);
 }
