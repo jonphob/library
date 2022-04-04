@@ -158,10 +158,6 @@ input#read_false {
   background-color: hsla(var(--button-bkg), 0.8);
 }
 
-.addBookBtn:active {
-  background-color: #cbaf87;
-}
-
 .main {
   grid-area: 2 / 2 / 7 / 3;
   border-radius: 5px;
@@ -307,11 +303,11 @@ input#read_false {
 dialog {
   border: 0;
   border-radius: 5px;
-  width: 60%%;
-  transition: opacity 0.5s;
+  width: 55%;
+  transition: 1.5s;
   opacity: 0;
   pointer-events: none;
-  display: none;
+  box-shadow: 0 0 1rem rgb(0 0 0 / 0.3);
 }
 
 dialog::backdrop {
@@ -321,7 +317,18 @@ dialog::backdrop {
 dialog[open] {
   opacity: 1;
   pointer-events: inherit;
-  display: block;
+  -webkit-animation: show-dialog 0.3s ease normal;
+}
+
+@-webkit-keyframes show-dialog {
+  from {
+    opacity: 0;
+    transform: translateY(-30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }
 
 #confirmLibraryDelete h1 {

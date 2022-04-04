@@ -4,6 +4,8 @@ const main = document.querySelector(".main");
 const readBtn = document.querySelector(".readBtn");
 const deleteBookBtn = document.querySelector(".deleteBook");
 const deleteLibraryBtn = document.querySelector(".deleteLibraryBtn");
+const cancelDelete = document.querySelector(".cancelDelete");
+const confirmDelete = document.querySelector(".confirmDelete");
 
 const emptyLibraryElement =
   "<div class='libraryEmpty'>" +
@@ -12,11 +14,11 @@ const emptyLibraryElement =
 
 //populate array with local storage if exists
 let library = JSON.parse(localStorage.getItem("library")) || [];
+console.log(library);
 
 form.addEventListener("submit", getBookFromInput);
 
 document.addEventListener("click", (e) => {
-  console.log(e);
   if (e.target.hasAttribute("data-bookID")) {
     toggleRead(e);
   }
@@ -32,6 +34,14 @@ document.addEventListener("click", (e) => {
     confirmLibraryDelete.addEventListener("close", (event) => {
       document.body.style.overflow = "";
     });
+  }
+
+  if (e.target.classList.contains("confirmDelete")) {
+    deleteLibrary();
+  }
+
+  if (e.target.classList.contains("cancelDelete")) {
+    confirmLibraryDelete.close();
   }
 });
 
@@ -144,6 +154,14 @@ function deleteBook(bookID) {
   console.log(refreshedLibrary, refreshedLibrary.length);
   localStorage.setItem("library", JSON.stringify(refreshedLibrary));
   refreshPage(refreshedLibrary);
+}
+
+function deleteLibrary() {
+  localStorage.clear();
+  library = [];
+  refreshPage(library);
+  localStorage.setItem("library", JSON.stringify(library));
+  confirmLibraryDelete.close();
 }
 
 refreshPage(library);
