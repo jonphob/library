@@ -24,7 +24,12 @@ body {
 }
 
 button {
-  transition: 350ms;
+  transition: background-color 250ms;
+}
+
+Button:focus {
+  border: 0;
+  outline: 0;
 }
 
 svg {
@@ -111,7 +116,7 @@ input#read_false {
   margin-bottom: 5px;
 }
 
-.addBookBtn {
+.btn {
   font-size: 1.2rem;
   display: block;
   width: 85%;
@@ -120,10 +125,32 @@ input#read_false {
   border-radius: 30px;
   border: 0;
   color: #fff;
-  background-color: hsla(var(--button-bkg), 1);
   position: absolute;
-  bottom: 96px;
   left: 14px;
+}
+
+.addBookBtn {
+  background-color: hsla(var(--button-bkg), 1);
+  bottom: 96px;
+}
+
+.addBookBtn:focus {
+  border: 1px solid white;
+  outline: 1px solid white;
+}
+
+.deleteLibraryBtn {
+  background-color: rgb(219, 34, 34);
+  bottom: 15px;
+}
+
+.deleteLibraryBtn:hover {
+  background-color: rgb(190, 28, 28);
+  cursor: pointer;
+}
+
+.deleteLibraryBtn:focus {
+  outline: 2px solid white;
 }
 
 .addBookBtn:hover {
@@ -175,10 +202,13 @@ input#read_false {
   padding: 10px;
   transition: 250ms;
   position: relative;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .badge {
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -187,8 +217,6 @@ input#read_false {
   background-color: #fff;
   border-radius: 50%;
   color: red;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   transition: 350ms;
 }
@@ -206,13 +234,15 @@ input#read_false {
 }
 
 .title {
-  font-weight: 600;
-  font-size: 0.8rem;
-  line-height: 1.2rem;
+  height: 4rem;
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 1.3rem;
   font-family: "Libre Baskerville";
 }
 
-.author {
+.author,
+.category {
   font-style: italic;
   font-size: 0.9rem;
   margin-top: 0.7rem;
@@ -249,15 +279,20 @@ input#read_false {
   background-color: hsla(var(--button-bkg), 0.8);
 }
 
+.readBtn:focus {
+  outline: 2px solid white;
+}
+
 .readIcon {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
-  margin-left: 5px;
+
   background-color: #fff;
-  padding: 2px;
+  padding: 1px;
   position: absolute;
-  right: 4px;
+  right: 3px;
+
   cursor: default;
 }
 
@@ -267,4 +302,9 @@ input#read_false {
 
 .false {
   color: red;
+}
+
+dialog {
+  border: 0;
+  border-radius: 5px;
 }

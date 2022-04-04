@@ -3,6 +3,7 @@ const emptyLibraryDiv = document.querySelector(".libraryEmpty");
 const main = document.querySelector(".main");
 const readBtn = document.querySelector(".readBtn");
 const deleteBookBtn = document.querySelector(".deleteBook");
+const deleteLibraryBtn = document.querySelector(".deleteLibraryBtn");
 
 const emptyLibraryElement =
   "<div class='libraryEmpty'>" +
@@ -15,6 +16,7 @@ let library = JSON.parse(localStorage.getItem("library")) || [];
 form.addEventListener("submit", getBookFromInput);
 
 document.addEventListener("click", (e) => {
+  console.log(e);
   if (e.target.hasAttribute("data-bookID")) {
     toggleRead(e);
   }
@@ -22,6 +24,14 @@ document.addEventListener("click", (e) => {
   if (e.target.hasAttribute("data-delete")) {
     let id = e.target.getAttribute("data-delete");
     deleteBook(id);
+  }
+
+  if (e.target.classList.contains("deleteLibraryBtn")) {
+    confirmLibraryDelete.showModal();
+    document.body.style.overflow = "hidden";
+    confirmLibraryDelete.addEventListener("close", (event) => {
+      document.body.style.overflow = "";
+    });
   }
 });
 
@@ -57,7 +67,7 @@ function refreshPage(library) {
       html += `<p class="id">${book.id}</p>`;
       html += `<p class="title">${book.title}</p>`;
       html += `<p class="author">${book.author}</p>`;
-      html += `<p class="pages">No. of Pages ${book.pages}</p>`;
+      html += `<p class="pages">Pages ${book.pages}</p>`;
 
       if (book.read === "true") {
         html += `<button data-bookID="${book.id}"class="readBtn">Read<i class="readIcon true fa-solid fa-check fa-xs"></i></button>`;
